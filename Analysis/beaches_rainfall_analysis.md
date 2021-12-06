@@ -168,9 +168,9 @@ to test a few days later to see if levels of bacteria have returned to
 safe levels. We should not expect such conditional samples to have the
 same distribution of bacteria levels as normal samples.
 
-Unfortunately, records are not entriely reliable on this matter, so the
-best we can do is figure out if samples wer collected on a “normal” day
-of hte week.
+Unfortunately, records are not entirely reliable on this matter, so the
+best we can do is figure out if samples were collected on a “normal” day
+of the week.
 
 We look at Crosstabs by year to figure out the pattern.
 
@@ -560,7 +560,7 @@ scale-location relationship looks close to linear, but in practice the
 inverse gaussian GLMs performed poorly (based on diagnostic plots).
 
 One issue is that both Gamma and Inverse Gaussian models only permit
-positive values. Our log transformed data (at least in principal) could
+positive values. Our log transformed data (at least in principle) could
 include negative values, if any of our original observations were below
 1. That did not happen.
 
@@ -607,7 +607,7 @@ certain level of rainfall triggers runoff, much higher rainfall has
 relatively little additional effect on bacteria levels. This suggests we
 may have a breakdown in the linear response for higher level rainfall
 events, which may cause the model to understate the importance of
-rainfal lat lower concentrations. We need to check that.
+rainfall at lower concentrations. We need to check that.
 
 ``` r
 (emms <- emmeans(gamma_glm, "SiteCode", type = 'response'))
