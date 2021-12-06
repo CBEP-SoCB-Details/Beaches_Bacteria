@@ -410,7 +410,7 @@ wide_data <- wide_data %>%
 
 ## Qualitative Weather and Environmental Data
 
-We have a problem with qualitative data,as they are coded as a series of
+We have a problem with qualitative data, as they are coded as a series of
 flags, which need to be interpreted and regrouped into factors.
 
 ``` r
@@ -742,7 +742,7 @@ wide_data %>%
 
 <img src="beaches_data_review_and_prep_files/figure-gfm/unnamed-chunk-28-1.png" style="display: block; margin: auto;" />
 
-So Prior to 2008, rainfall totals were reported as the totals for the
+So prior to 2008, rainfall totals were reported as the totals for the
 prior 24 hours. Since 2008, rainfall a has been reported for the prior
 24 hours.
 
