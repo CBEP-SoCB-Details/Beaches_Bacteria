@@ -1,8 +1,8 @@
 # Data Sources
 The excel file "CascoBay_StateOfTheBay_DataRequest 04152020.xlsx" was received
 in an e-mail from Meagan Sims to Curtis Bohlen on 4.17.2020.  The file consists 
-of two tabs, the first provides geospatioal data, as latitudes and longitudes, 
-for Casco Bay beacjhes.
+of two tabs, the first provides geospatial data, as latitudes and longitudes, 
+for Casco Bay beaches.
 
 ## Metadata
 Complementary metadata for is in "EGAD_LookupTables_Version6.0.xlsx"
