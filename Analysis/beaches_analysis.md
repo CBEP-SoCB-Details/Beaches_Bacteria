@@ -64,7 +64,7 @@ To be added….
 
 ### Maine State Class SB Waters Standards
 
-> the number of enterococcus bacteria in these waters may not exceed a
+> The number of enterococcus bacteria in these waters may not exceed a
 > geometric mean of 8 CFU per 100 milliliters in any 90-day interval or
 > 54 CFU per 100 milliliters in more than 10% of the samples in any
 > 90-day interval.
@@ -1570,5 +1570,5 @@ report that result with appropriate humility. We noted some apparently
 statistically significant trends when analyzing different subsets of the
 data. Those may result from inadvertent “cherry picking” of the data, or
 because of short-term observable trends. Also, we lack good,
-consistently controlled predictors for the entire period of record,a s
+consistently controlled predictors for the entire period of record, as
 some methods changed
