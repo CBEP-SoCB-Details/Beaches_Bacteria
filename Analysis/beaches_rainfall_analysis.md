@@ -4,6 +4,7 @@ Curtis C. Bohlen, Casco Bay Estuary Partnership.
 01/23/2021
 
 -   [Introduction](#introduction)
+    -   [Standards](#standards)
 -   [Import Libraries](#import-libraries)
 -   [Data Preparation](#data-preparation)
     -   [Initial Folder References](#initial-folder-references)
@@ -35,21 +36,25 @@ Curtis C. Bohlen, Casco Bay Estuary Partnership.
 
 To be added….
 
-\#\#Standards 104 CFU / 100 ml, for individual observations.
+## Standards
+
+104 CFU / 100 ml, for individual observations.
 
 # Import Libraries
 
 ``` r
 library(fitdistrplus)
+#> Warning: package 'fitdistrplus' was built under R version 4.0.5
 #> Loading required package: MASS
 #> Loading required package: survival
 library(tidyverse)
 #> Warning: package 'tidyverse' was built under R version 4.0.5
 #> -- Attaching packages --------------------------------------- tidyverse 1.3.1 --
-#> v ggplot2 3.3.3     v purrr   0.3.4
-#> v tibble  3.1.2     v dplyr   1.0.6
-#> v tidyr   1.1.3     v stringr 1.4.0
-#> v readr   1.4.0     v forcats 0.5.1
+#> v ggplot2 3.3.5     v purrr   0.3.4
+#> v tibble  3.1.6     v dplyr   1.0.7
+#> v tidyr   1.1.4     v stringr 1.4.0
+#> v readr   2.1.0     v forcats 0.5.1
+#> Warning: package 'ggplot2' was built under R version 4.0.5
 #> Warning: package 'tidyr' was built under R version 4.0.5
 #> Warning: package 'dplyr' was built under R version 4.0.5
 #> Warning: package 'forcats' was built under R version 4.0.5
@@ -68,10 +73,9 @@ library(mgcv)      # For GAMs and GAMMs; used here for seasonal smoothers
 #> The following object is masked from 'package:dplyr':
 #> 
 #>     collapse
-#> This is mgcv 1.8-35. For overview type 'help("mgcv-package")'.
+#> This is mgcv 1.8-38. For overview type 'help("mgcv-package")'.
 library(emmeans)   # For marginal means
-
-library(mblm)      # for the Thiel-Sen estimators
+#> Warning: package 'emmeans' was built under R version 4.0.5
 
 library(CBEPgraphics)
 load_cbep_fonts()
@@ -98,25 +102,17 @@ sibling     <- file.path(parent,sibfldnm)
 ``` r
 fn <- "beaches_data.csv"
 beach_data <- read_csv(file.path(sibling, fn))
-#> 
+#> Rows: 1895 Columns: 24
 #> -- Column specification --------------------------------------------------------
-#> cols(
-#>   .default = col_double(),
-#>   SiteCode = col_character(),
-#>   sdatetime = col_datetime(format = ""),
-#>   sdate = col_date(format = ""),
-#>   Sample_ID = col_character(),
-#>   Sample_Qualifier = col_character(),
-#>   Lab_Qualifier = col_character(),
-#>   Censored_Flag = col_logical(),
-#>   Weather = col_character(),
-#>   Past24HR_Weather = col_character(),
-#>   Past48HR_Weather = col_character(),
-#>   Tide_Stage = col_logical(),
-#>   Water_Surface = col_character(),
-#>   Current = col_logical()
-#> )
-#> i Use `spec()` for the full column specifications.
+#> Delimiter: ","
+#> chr   (8): SiteCode, Sample_ID, Sample_Qualifier, Lab_Qualifier, Weather, Pa...
+#> dbl  (11): Year, Month, DOY, Enterococci, Reporting_Limit, Bacteria, Rain24,...
+#> lgl   (3): Censored_Flag, Tide_Stage, Current
+#> dttm  (1): sdatetime
+#> date  (1): sdate
+#> 
+#> i Use `spec()` to retrieve the full column specification for this data.
+#> i Specify the column types or set `show_col_types = FALSE` to quiet this message.
 ```
 
 ``` r
@@ -168,9 +164,9 @@ to test a few days later to see if levels of bacteria have returned to
 safe levels. We should not expect such conditional samples to have the
 same distribution of bacteria levels as normal samples.
 
-Unfortunately, records are not entriely reliable on this matter, so the
-best we can do is figure out if samples wer collected on a “normal” day
-of hte week.
+Unfortunately, records are not entirely reliable on this matter, so the
+best we can do is figure out if samples were collected on a “normal” day
+of the week.
 
 We look at Crosstabs by year to figure out the pattern.
 
@@ -456,12 +452,12 @@ recent_data %>%
 #> # A tibble: 6 x 8
 #>   SiteCode years median_Bacteria gmean_bacteria mean_Bacteria     n n_exceeds
 #>   <chr>    <int>           <dbl>          <dbl>         <dbl> <int>     <int>
-#> 1 BC-1         4            3.58           7.47         37.1     51         2
-#> 2 EEB-01       4           10              9.42         36.1    103         8
-#> 3 HARP-1       2            3.43           3.90          4.22    25         0
-#> 4 HARP-2       2            3.47           7.29         18.3     26         1
-#> 5 HARP-3       2           20             17.1          41.9     26         4
-#> 6 WIL-02       4           10             14.8         244.     105         9
+#> 1 BC-1         4            3.55           7.45         37.1     51         2
+#> 2 EEB-01       4           10              9.44         36.1    103         8
+#> 3 HARP-1       2            3.46           3.90          4.22    25         0
+#> 4 HARP-2       2            3.47           7.32         18.4     26         1
+#> 5 HARP-3       2           20             17.0          41.9     26         4
+#> 6 WIL-02       4           10             14.9         244.     105         9
 #> # ... with 1 more variable: p_exceeds <dbl>
 ```
 
@@ -560,7 +556,7 @@ scale-location relationship looks close to linear, but in practice the
 inverse gaussian GLMs performed poorly (based on diagnostic plots).
 
 One issue is that both Gamma and Inverse Gaussian models only permit
-positive values. Our log transformed data (at least in principal) could
+positive values. Our log transformed data (at least in principle) could
 include negative values, if any of our original observations were below
 1. That did not happen.
 
@@ -607,7 +603,7 @@ certain level of rainfall triggers runoff, much higher rainfall has
 relatively little additional effect on bacteria levels. This suggests we
 may have a breakdown in the linear response for higher level rainfall
 events, which may cause the model to understate the importance of
-rainfal lat lower concentrations. We need to check that.
+rainfall at lower concentrations. We need to check that.
 
 ``` r
 (emms <- emmeans(gamma_glm, "SiteCode", type = 'response'))
@@ -861,11 +857,11 @@ anova(trend_glm, test = 'LRT')
 #> 
 #> 
 #>               Df Deviance Resid. Df Resid. Dev  Pr(>Chi)    
-#> NULL                            712     224.88              
-#> Beach          1    2.257       711     222.62  0.004105 ** 
-#> Year           1    1.080       710     221.54  0.047102 *  
-#> log1p(Rain48)  1   34.432       709     187.11 < 2.2e-16 ***
-#> Beach:Year     1    0.257       708     186.85  0.333162    
+#> NULL                            712     225.03              
+#> Beach          1    2.272       711     222.76  0.003997 ** 
+#> Year           1    1.079       710     221.68  0.047312 *  
+#> log1p(Rain48)  1   34.514       709     187.17 < 2.2e-16 ***
+#> Beach:Year     1    0.260       708     186.91  0.330096    
 #> ---
 #> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
@@ -883,22 +879,22 @@ summary(trend_glm)
 #> 
 #> Deviance Residuals: 
 #>      Min        1Q    Median        3Q       Max  
-#> -1.46233  -0.57477  -0.06861   0.28872   1.51365  
+#> -1.42525  -0.57655  -0.06825   0.28922   1.51352  
 #> 
 #> Coefficients:
 #>                          Estimate Std. Error t value Pr(>|t|)    
-#> (Intercept)             -6.221247   5.721304  -1.087    0.277    
-#> BeachWillard Beach       7.829071   8.153312   0.960    0.337    
-#> Year                     0.003308   0.002842   1.164    0.245    
-#> log1p(Rain48)           -0.167798   0.012058 -13.916   <2e-16 ***
-#> BeachWillard Beach:Year -0.003914   0.004050  -0.966    0.334    
+#> (Intercept)             -6.235235   5.724475  -1.089    0.276    
+#> BeachWillard Beach       7.882025   8.156443   0.966    0.334    
+#> Year                     0.003315   0.002844   1.166    0.244    
+#> log1p(Rain48)           -0.167953   0.012055 -13.932   <2e-16 ***
+#> BeachWillard Beach:Year -0.003941   0.004052  -0.973    0.331    
 #> ---
 #> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 #> 
-#> (Dispersion parameter for Gamma family taken to be 0.2739711)
+#> (Dispersion parameter for Gamma family taken to be 0.2741791)
 #> 
-#>     Null deviance: 224.88  on 712  degrees of freedom
-#> Residual deviance: 186.85  on 708  degrees of freedom
+#>     Null deviance: 225.03  on 712  degrees of freedom
+#> Residual deviance: 186.91  on 708  degrees of freedom
 #>   (17 observations deleted due to missingness)
 #> AIC: 2333.3
 #> 
@@ -910,8 +906,8 @@ emtrends(trend_glm, ~ Beach,
          var = "Year", 
          at = list(Rain48 = 0))
 #>  Beach          Year.trend      SE  df asymp.LCL asymp.UCL
-#>  East End Beach   0.003308 0.00284 Inf  -0.00226   0.00888
-#>  Willard Beach   -0.000607 0.00293 Inf  -0.00635   0.00514
+#>  East End Beach   0.003315 0.00284 Inf  -0.00226   0.00889
+#>  Willard Beach   -0.000626 0.00293 Inf  -0.00637   0.00512
 #> 
 #> Results are given on the log (not the response) scale. 
 #> Confidence level used: 0.95

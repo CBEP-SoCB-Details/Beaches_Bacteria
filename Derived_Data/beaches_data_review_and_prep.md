@@ -1,4 +1,4 @@
-Preparation of data on Bacteria Levels at Casco Bay Beaches
+Preparation of Data on Bacteria Levels at Casco Bay Beaches
 ================
 Curtis C. Bohlen, Casco Bay Estuary Partnership.
 01/23/2021
@@ -43,11 +43,16 @@ Curtis C. Bohlen, Casco Bay Estuary Partnership.
 
 ``` r
 library(tidyverse)
-#> -- Attaching packages --------------------------------------- tidyverse 1.3.0 --
-#> v ggplot2 3.3.3     v purrr   0.3.4
-#> v tibble  3.0.5     v dplyr   1.0.3
-#> v tidyr   1.1.2     v stringr 1.4.0
-#> v readr   1.4.0     v forcats 0.5.0
+#> Warning: package 'tidyverse' was built under R version 4.0.5
+#> -- Attaching packages --------------------------------------- tidyverse 1.3.1 --
+#> v ggplot2 3.3.5     v purrr   0.3.4
+#> v tibble  3.1.6     v dplyr   1.0.7
+#> v tidyr   1.1.4     v stringr 1.4.0
+#> v readr   2.1.0     v forcats 0.5.1
+#> Warning: package 'ggplot2' was built under R version 4.0.5
+#> Warning: package 'tidyr' was built under R version 4.0.5
+#> Warning: package 'dplyr' was built under R version 4.0.5
+#> Warning: package 'forcats' was built under R version 4.0.5
 #> -- Conflicts ------------------------------------------ tidyverse_conflicts() --
 #> x dplyr::filter() masks stats::filter()
 #> x dplyr::lag()    masks stats::lag()
@@ -121,18 +126,18 @@ raw_data %>%
          MDL =  replace_na(MDL, -1)) %>%
   filter(Reporting.Limit != MDL)
 #> # A tibble: 434 x 14
-#>    Sample.Point.Na~ Sample.Date         Sample.Id Sample.Type CAS.Name
-#>    <chr>            <dttm>              <chr>     <chr>       <chr>   
-#>  1 WIL-01           2010-06-14 09:33:00 WIL-01 6~ SURFACE WA~ ENTEROC~
-#>  2 WIL-01           2010-06-16 09:32:00 WIL-01 6~ SURFACE WA~ ENTEROC~
-#>  3 WIL-01           2010-06-02 09:30:00 WIL-01 6~ SURFACE WA~ ENTEROC~
-#>  4 WIL-01           2010-06-21 09:30:00 WIL-01 6~ SURFACE WA~ ENTEROC~
-#>  5 WIL-01           2010-06-23 09:17:00 WIL-01 6~ SURFACE WA~ ENTEROC~
-#>  6 WIL-01           2010-06-24 11:00:00 WIL-01 6~ SURFACE WA~ ENTEROC~
-#>  7 WIL-01           2010-06-28 09:49:00 WIL-01 6~ SURFACE WA~ ENTEROC~
-#>  8 WIL-01           2010-06-29 12:27:00 WIL-01 6~ SURFACE WA~ ENTEROC~
-#>  9 WIL-01           2010-06-30 09:35:00 WIL-01 6~ SURFACE WA~ ENTEROC~
-#> 10 WIL-01           2010-06-07 09:24:00 WIL-01 6~ SURFACE WA~ ENTEROC~
+#>    Sample.Point.Name Sample.Date         Sample.Id        Sample.Type   CAS.Name
+#>    <chr>             <dttm>              <chr>            <chr>         <chr>   
+#>  1 WIL-01            2010-06-14 09:33:00 WIL-01 6/14/2010 SURFACE WATER ENTEROC~
+#>  2 WIL-01            2010-06-16 09:32:00 WIL-01 6/16/2010 SURFACE WATER ENTEROC~
+#>  3 WIL-01            2010-06-02 09:30:00 WIL-01 6/2/2010  SURFACE WATER ENTEROC~
+#>  4 WIL-01            2010-06-21 09:30:00 WIL-01 6/21/2010 SURFACE WATER ENTEROC~
+#>  5 WIL-01            2010-06-23 09:17:00 WIL-01 6/23/2010 SURFACE WATER ENTEROC~
+#>  6 WIL-01            2010-06-24 11:00:00 WIL-01 6/24/2010 SURFACE WATER ENTEROC~
+#>  7 WIL-01            2010-06-28 09:49:00 WIL-01 6/28/2010 SURFACE WATER ENTEROC~
+#>  8 WIL-01            2010-06-29 12:27:00 WIL-01 6/29/2010 SURFACE WATER ENTEROC~
+#>  9 WIL-01            2010-06-30 09:35:00 WIL-01 6/30/2010 SURFACE WATER ENTEROC~
+#> 10 WIL-01            2010-06-07 09:24:00 WIL-01 6/7/2010  SURFACE WATER ENTEROC~
 #> # ... with 424 more rows, and 9 more variables: Concentration <dbl>,
 #> #   Parameter.Unit <chr>, Lab.Qualifier <chr>, Reporting.Limit <dbl>,
 #> #   Test.Code <chr>, Dilution.Factor <dbl>, MDL <dbl>,
@@ -410,8 +415,8 @@ wide_data <- wide_data %>%
 
 ## Qualitative Weather and Environmental Data
 
-We have a problem with qualitative data,as they are coded as a series of
-flags, which need to be interpreted and regrouped into factors.
+We have a problem with qualitative data, as they are coded as a series
+of flags, which need to be interpreted and regrouped into factors.
 
 ``` r
 context_data <- raw_data %>%
@@ -597,20 +602,20 @@ dups
 context_data_final %>%
   filter(Sample.Id %in% dups)
 #> # A tibble: 12 x 13
-#>    SiteCode sdatetime           Sample.Id Weather Past24HR_Weather
-#>    <chr>    <dttm>              <chr>     <fct>   <fct>           
-#>  1 WIL-02   2005-06-16 00:00:00 WIL-02 6~ OVERCA~ <NA>            
-#>  2 WIL-02   2005-06-16 12:40:00 WIL-02 6~ OVERCA~ <NA>            
-#>  3 WIL-02   2004-07-15 00:00:00 WIL-02 7~ CLEAR   <NA>            
-#>  4 WIL-02   2004-07-15 14:25:00 WIL-02 7~ CLEAR   <NA>            
-#>  5 WIL-03   2005-06-16 00:00:00 WIL-03 6~ OVERCA~ <NA>            
-#>  6 WIL-03   2005-06-16 12:45:00 WIL-03 6~ OVERCA~ <NA>            
-#>  7 WIL-03   2004-07-15 00:00:00 WIL-03 7~ CLEAR   <NA>            
-#>  8 WIL-03   2004-07-15 14:30:00 WIL-03 7~ CLEAR   <NA>            
-#>  9 EEB-01   2003-07-11 00:00:00 EEB-01 7~ CLEAR   <NA>            
-#> 10 EEB-01   2003-07-11 07:35:00 EEB-01 7~ CLEAR   <NA>            
-#> 11 EEB-01   2007-08-06 00:00:00 EEB-01 8~ OVERCA~ <NA>            
-#> 12 EEB-01   2007-08-06 11:10:00 EEB-01 8~ OVERCA~ <NA>            
+#>    SiteCode sdatetime           Sample.Id        Weather  Past24HR_Weather
+#>    <chr>    <dttm>              <chr>            <fct>    <fct>           
+#>  1 WIL-02   2005-06-16 00:00:00 WIL-02 6/16/2005 OVERCAST <NA>            
+#>  2 WIL-02   2005-06-16 12:40:00 WIL-02 6/16/2005 OVERCAST <NA>            
+#>  3 WIL-02   2004-07-15 00:00:00 WIL-02 7/15/2004 CLEAR    <NA>            
+#>  4 WIL-02   2004-07-15 14:25:00 WIL-02 7/15/2004 CLEAR    <NA>            
+#>  5 WIL-03   2005-06-16 00:00:00 WIL-03 6/16/2005 OVERCAST <NA>            
+#>  6 WIL-03   2005-06-16 12:45:00 WIL-03 6/16/2005 OVERCAST <NA>            
+#>  7 WIL-03   2004-07-15 00:00:00 WIL-03 7/15/2004 CLEAR    <NA>            
+#>  8 WIL-03   2004-07-15 14:30:00 WIL-03 7/15/2004 CLEAR    <NA>            
+#>  9 EEB-01   2003-07-11 00:00:00 EEB-01 7/11/2003 CLEAR    <NA>            
+#> 10 EEB-01   2003-07-11 07:35:00 EEB-01 7/11/2003 CLEAR    <NA>            
+#> 11 EEB-01   2007-08-06 00:00:00 EEB-01 8/6/2007  OVERCAST <NA>            
+#> 12 EEB-01   2007-08-06 11:10:00 EEB-01 8/6/2007  OVERCAST <NA>            
 #> # ... with 8 more variables: Past48HR_Weather <chr>, Tide_Stage <fct>,
 #> #   Water_Surface <chr>, Current <fct>, Year <dbl>, Month <dbl>, DOY <dbl>,
 #> #   sdate <date>
@@ -742,7 +747,7 @@ wide_data %>%
 
 <img src="beaches_data_review_and_prep_files/figure-gfm/unnamed-chunk-28-1.png" style="display: block; margin: auto;" />
 
-So Prior to 2008, rainfall totals were reported as the totals for the
+So prior to 2008, rainfall totals were reported as the totals for the
 prior 24 hours. Since 2008, rainfall a has been reported for the prior
 24 hours.
 

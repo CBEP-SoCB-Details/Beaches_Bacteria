@@ -21,7 +21,7 @@ knitr::opts_chunk$set(fig.align = 'center',
 # Introduction
 To be added....
 
-##Standards
+## Standards
 104 CFU / 100 ml, for individual observations.
 
 # Import Libraries  
@@ -33,8 +33,6 @@ library(tidyverse)
 
 library(mgcv)      # For GAMs and GAMMs; used here for seasonal smoothers
 library(emmeans)   # For marginal means
-
-library(mblm)      # for the Thiel-Sen estimators
 
 library(CBEPgraphics)
 load_cbep_fonts()
@@ -101,8 +99,8 @@ later to see if levels of bacteria have returned to safe levels.  We should not
 expect such conditional samples to have the same distribution of bacteria levels
 as normal samples.
 
-Unfortunately, records are not entriely reliable on this matter, so the best
-we can do is figure out if samples wer collected on a "normal" day of hte week.
+Unfortunately, records are not entirely reliable on this matter, so the best
+we can do is figure out if samples were collected on a "normal" day of the week.
 
 We look at Crosstabs by year to figure out the pattern.
 ```{r table_by_day}
@@ -265,7 +263,7 @@ looks close to linear, but in practice the inverse gaussian GLMs performed
 poorly (based on diagnostic plots).
 
 One issue is that both Gamma and Inverse Gaussian models only permit positive
-values.  Our log transformed data (at least in principal) could include negative
+values.  Our log transformed data (at least in principle) could include negative
 values, if any of our original observations were below 1.  That did not happen.
 
 Our original data were quasi-count data, with a positive detection limit 
@@ -299,7 +297,7 @@ associated with high rainfall events. It is likely that after a certain
 level of rainfall triggers runoff, much higher rainfall has relatively little
 additional effect on bacteria levels.  This suggests we may have a breakdown in 
 the linear response for higher level rainfall events, which may cause the model 
-to understate the importance of rainfal lat lower concentrations. We need to 
+to understate the importance of rainfall at lower concentrations. We need to 
 check that.
 
 ```{r}

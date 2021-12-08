@@ -1,5 +1,5 @@
 ---
-title: "Preparation of data on Bacteria Levels at Casco Bay Beaches"
+title: "Preparation of Data on Bacteria Levels at Casco Bay Beaches"
 author: "Curtis C. Bohlen, Casco Bay Estuary Partnership."
 date: "01/23/2021"
 output:
@@ -260,7 +260,7 @@ wide_data <- wide_data %>%
 
 
 ## Qualitative Weather and Environmental Data
-We have a problem with qualitative data,as they are coded as a series of flags,
+We have a problem with qualitative data, as they are coded as a series of flags,
 which need to be interpreted and regrouped into factors.
 
 ```{r}
@@ -488,7 +488,7 @@ wide_data %>%
 
 ```
 
-So Prior to 2008, rainfall totals were reported as the totals for the prior 24 
+So prior to 2008, rainfall totals were reported as the totals for the prior 24 
 hours. Since 2008, rainfall a has been reported for the prior 24 hours.
 
 

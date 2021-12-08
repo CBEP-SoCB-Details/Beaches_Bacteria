@@ -76,8 +76,6 @@ non-detects with maximum likelihood estimators of their conditional means.
 library(fitdistrplus)
 library(tidyverse)
 
-# library(GGally)
-
 library(mgcv)      # For GAMs and GAMMs; used here for seasonal smoothers
 library(emmeans)   # For marginal means
 

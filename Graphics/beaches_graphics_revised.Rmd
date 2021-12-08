@@ -49,21 +49,13 @@ correlated, but are not directly comparable because of different methods.
 
 # Import Libraries  
 ```{r import_libraries}
-#library(fitdistrplus)
+
 library(tidyverse)
-
-# library(GGally)
-
-#library(mgcv)      # For GAMs and GAMMs; used here for seasonal smoothers
-#library(emmeans)   # For marginal means
-
-#library(mblm)      # for the Thiel-Sen estimators
 
 library(CBEPgraphics)
 load_cbep_fonts()
 theme_set(theme_cbep())
 
-#library(LCensMeans)
 ```
 
 # Data Preparation
